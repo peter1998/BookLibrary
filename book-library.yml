@@ -1,0 +1,263 @@
+openapi: '3.0.2'
+info:
+  title: Book Library API
+  version: '1.0'
+servers:
+  - url: https://api.server.test/v1
+paths:
+  /book:
+    post:
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/BookEdit'
+      responses:
+        '201':
+          description: Created
+  /book/{bookId}:
+    get:
+      parameters:
+        - name: bookId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/BookFull'
+        '404':
+          description: Not Found
+    put:
+      parameters:
+      - name: bookId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/BookEdit'
+      responses:
+        '200':
+          description: Updated
+  /book/{bookId}/comments:
+    get:
+      parameters:
+        - name: bookId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Comment'
+        '404':
+          description: Not Found
+    post:
+      parameters:
+        - name: bookId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              type: string
+      responses:
+        '201':
+          description: Created
+
+  /book/{bookId}/comments/{commentId}:
+    get:
+      parameters:
+        - name: bookId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: commentId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Comment'
+        '404':
+          description: Not Found
+    put:
+      parameters:
+        - name: bookId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: commentId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              type: string
+      responses:
+        '200':
+          description: OK
+  /search:
+    get:
+      parameters:
+        - name: title
+          in: query
+          description: Query string for filtering books by title
+          required: false
+          schema:
+            type: string
+        - name: ganre
+          in: query
+          description: Query string for filtering books by title
+          required: false
+          schema:
+            type: string
+        - name: language
+          in: query
+          description: Query string for filtering books by title
+          required: false
+          schema:
+            type: string
+        - name: section
+          in: query
+          description: Query string for filtering books by title
+          required: false
+          schema:
+            type: string
+        - name: availableOnly
+          in: query
+          description: Query string for filtering books by title
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BookPreview'
+
+components:
+  schemas:
+    BookEdit:
+      type: object
+      properties:
+        title:
+          type: string
+          example: The Lions of Fifth Avenue
+        author:
+          type: string
+          example: Fiona Davis
+        cover:
+          type: string
+          format: binary
+        publicationDate:
+          type: string
+          format: date
+          example: "2020-04-08"
+        language:
+          type: string
+          example: English
+        ganre:
+          type: string
+          example: Fantasy
+        numberOfPages:
+          type: integer
+          minimum: 1
+          example: 398
+        section:
+          type: string
+        numberOfCopies:
+          type: integer
+          minimum: 1
+        details:
+          type: string
+          example: If you’ve ever had the pleasure of walking through the towering statues Patience and Fortitude—the stately lions that stand proudly in front of the New York Public Library’s 42nd Street location—you understand that entering this building can be a breathtaking experience, especially for book lovers. What Davis has done here is take all that awe and wonder and weave it throughout a delightful mystery/historical novel that travels across generations of fearless women. “[A] page-turner for booklovers everywhere!
+    BookPreview:
+      type: object
+      properties:
+        title:
+          type: string
+          example: The Lions of Fifth Avenue
+        author:
+          type: string
+          example: Fiona Davis
+        cover: 
+          type: string
+          format: string
+          example: https://prodimage.images-bn.com/lf?set=key%5Bresolve.pixelRatio%5D,value%5B1%5D&set=key%5Bresolve.width%5D,value%5B550%5D&set=key%5Bresolve.height%5D,value%5B10000%5D&set=key%5Bresolve.imageFit%5D,value%5Bcontainerwidth%5D&set=key%5Bresolve.allowImageUpscaling%5D,value%5B0%5D&product=path%5B/pimages/9781524744618_p0_v4%5D&call=url%5Bfile:common/decodeProduct.chain%5D
+        publicationDate:
+          type: string
+          format: date
+          example: "2020-04-08"
+        details:
+          type: string
+          example: If you’ve ever had the pleasure of walking through the towering statues Patience and Fortitude—the stately lions that stand proudly in front of the New York Public Library’s 42nd Street location—you understand that entering this building can be a breathtaking experience, especially for book lovers. What Davis has done here is take all that awe and wonder and weave it throughout a delightful mystery/historical novel that travels across generations of fearless women. “[A] page-turner for booklovers everywhere!
+    Comment:
+      type: object
+      properties:
+        author:
+          type: string
+          example: Fiona Davis
+        authorLink:
+          type: string
+          example: Fiona Davis
+        publicationDate:
+          type: string
+          format: date
+          example: "2020-04-08"
+        details:
+          type: string
+          example: If you’ve ever had the pleasure of walking through the towering statues Patience and Fortitude—the stately lions that stand proudly in front of the New York Public Library’s 42nd Street location—you understand that entering this building can be a breathtaking experience, especially for book lovers. What Davis has done here is take all that awe and wonder and weave it throughout a delightful mystery/historical novel that travels across generations of fearless women. “[A] page-turner for booklovers everywhere!
+    BookFull:
+      allOf:
+        - $ref: '#/components/schemas/BookPreview'
+        - type: object
+      properties:
+        language:
+          type: string
+          example: English
+        ganre:
+          type: string
+          example: Fantasy
+        numberOfPages:
+          type: integer
+          minimum: 1
+          example: 398
+        numberOfCopies:
+          type: integer
+          minimum: 1
+        commentsLink:
+          type: string
