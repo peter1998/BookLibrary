@@ -126,6 +126,28 @@ paths:
       responses:
         '200':
           description: OK
+  /reader:
+    get:
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BookPreview'
+  /reader/books:
+    get:
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LendedBook'
   /search:
     get:
       parameters:
@@ -261,3 +283,41 @@ components:
           minimum: 1
         commentsLink:
           type: string
+    Reader:
+      allOf:
+        - $ref: '#/components/schemas/ReaderPreview'
+          type: object
+          properties:   
+            sectionAccess:
+              type: integer
+              example: 1
+            expirence:
+              type: integer
+              example: 0
+    ReaderPreview:
+      type: object
+      properties:   
+        firstName:
+          type: string
+          example: English
+        lastName:
+          type: string
+          example: English
+        email:
+          type: string
+          format: email
+          example: test@test.org
+    LendedBook:
+      type: object
+      properties:   
+        bookURL:
+          type: string
+          example: English
+        dateOfLending:
+          type: string
+          format: date
+          example: "2020-04-08"
+        dateOfRetrival:
+          type: string
+          format: date
+          example: "2020-04-08"
