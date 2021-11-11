@@ -5,7 +5,7 @@ info:
 servers:
   - url: https://api.server.test/v1
 paths:
-  /book:
+  /books:
     post:
       requestBody:
         content:
@@ -15,140 +15,6 @@ paths:
       responses:
         '201':
           description: Created
-  /book/{bookId}:
-    get:
-      parameters:
-        - name: bookId
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                  $ref: '#/components/schemas/BookFull'
-        '404':
-          description: Not Found
-    put:
-      parameters:
-      - name: bookId
-        in: path
-        required: true
-        schema:
-          type: string
-      requestBody:
-        content:
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/BookEdit'
-      responses:
-        '200':
-          description: Updated
-  /book/{bookId}/comments:
-    get:
-      parameters:
-        - name: bookId
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                  type: array
-                  items:
-                    $ref: '#/components/schemas/Comment'
-        '404':
-          description: Not Found
-    post:
-      parameters:
-        - name: bookId
-          in: path
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          text/plain:
-            schema:
-              type: string
-      responses:
-        '201':
-          description: Created
-
-  /book/{bookId}/comments/{commentId}:
-    get:
-      parameters:
-        - name: bookId
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: commentId
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                  type: array
-                  items:
-                    $ref: '#/components/schemas/Comment'
-        '404':
-          description: Not Found
-    put:
-      parameters:
-        - name: bookId
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: commentId
-          in: path
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          text/plain:
-            schema:
-              type: string
-      responses:
-        '200':
-          description: OK
-  /reader:
-    get:
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/BookPreview'
-  /reader/books:
-    get:
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/LendedBook'
-  /search:
     get:
       parameters:
         - name: title
@@ -190,6 +56,139 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/BookPreview'
+  /books/{bookId}:
+    get:
+      parameters:
+        - name: bookId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/BookFull'
+        '404':
+          description: Not Found
+    put:
+      parameters:
+      - name: bookId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/BookEdit'
+      responses:
+        '200':
+          description: Updated
+  /books/{bookId}/comments:
+    get:
+      parameters:
+        - name: bookId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Comment'
+        '404':
+          description: Not Found
+    post:
+      parameters:
+        - name: bookId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              type: string
+      responses:
+        '201':
+          description: Created
+
+  /books/{bookId}/comments/{commentId}:
+    get:
+      parameters:
+        - name: bookId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: commentId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Comment'
+        '404':
+          description: Not Found
+    put:
+      parameters:
+        - name: bookId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: commentId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              type: string
+      responses:
+        '200':
+          description: OK
+  /readers:
+    get:
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BookPreview'
+  /readers/books:
+    get:
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LendedBook'
 
 components:
   schemas:
