@@ -178,8 +178,36 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/BookPreview'
-  /readers/books:
+  /readers/{readerId}:
     get:
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Reader'
+  /readers/{readerId}/books:
+    get:
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LendedBook'
+    post:
+      requestBody:
+        content:
+          application/json:
+              schema:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/LendBook'
       responses:
         '200':
           description: OK
@@ -312,11 +340,24 @@ components:
         bookURL:
           type: string
           example: English
-        dateOfLending:
+        dateLended:
           type: string
           format: date
           example: "2020-04-08"
-        dateOfRetrival:
+        dateRetrived:
+          type: string
+          format: date
+          example: "2020-04-08"
+        lendedForTime:
+          type: string
+          example: 30d
+    LendBook:
+      type: object
+      properties:   
+        bookId:
+          type: string
+          example: English
+        lendedForTime:
           type: string
           format: date
           example: "2020-04-08"
