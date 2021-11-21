@@ -65,3 +65,11 @@
 * Заявка за изстриване на книга
 Читателси профил
 
+
+Features:
+	- Reting (Likes/Dislikes)
+	- Reader pictures 
+	- Expirience and Ranks
+	- Reader Admin type
+	- Mail for expired lends
+

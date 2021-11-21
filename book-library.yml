@@ -70,16 +70,16 @@ paths:
           content:
             application/json:
               schema:
-                  $ref: '#/components/schemas/BookFull'
+                $ref: '#/components/schemas/BookFull'
         '404':
           description: Not Found
     put:
       parameters:
-      - name: bookId
-        in: path
-        required: true
-        schema:
-          type: string
+        - name: bookId
+          in: path
+          required: true
+          schema:
+            type: string
       requestBody:
         content:
           multipart/form-data:
@@ -102,9 +102,9 @@ paths:
           content:
             application/json:
               schema:
-                  type: array
-                  items:
-                    $ref: '#/components/schemas/Comment'
+                type: array
+                items:
+                  $ref: '#/components/schemas/Comment'
         '404':
           description: Not Found
     post:
@@ -142,9 +142,9 @@ paths:
           content:
             application/json:
               schema:
-                  type: array
-                  items:
-                    $ref: '#/components/schemas/Comment'
+                type: array
+                items:
+                  $ref: '#/components/schemas/Comment'
         '404':
           description: Not Found
     put:
@@ -204,10 +204,10 @@ paths:
       requestBody:
         content:
           application/json:
-              schema:
-                  type: array
-                  items:
-                    $ref: '#/components/schemas/LendBook'
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/LendBook'
       responses:
         '200':
           description: OK
@@ -263,7 +263,7 @@ components:
         author:
           type: string
           example: Fiona Davis
-        cover: 
+        cover:
           type: string
           format: string
           example: https://prodimage.images-bn.com/lf?set=key%5Bresolve.pixelRatio%5D,value%5B1%5D&set=key%5Bresolve.width%5D,value%5B550%5D&set=key%5Bresolve.height%5D,value%5B10000%5D&set=key%5Bresolve.imageFit%5D,value%5Bcontainerwidth%5D&set=key%5Bresolve.allowImageUpscaling%5D,value%5B0%5D&product=path%5B/pimages/9781524744618_p0_v4%5D&call=url%5Bfile:common/decodeProduct.chain%5D
@@ -287,6 +287,10 @@ components:
           type: string
           format: date
           example: "2020-04-08"
+        rating:
+          type: number
+          format: float
+          example: 4.6
         details:
           type: string
           example: If you’ve ever had the pleasure of walking through the towering statues Patience and Fortitude—the stately lions that stand proudly in front of the New York Public Library’s 42nd Street location—you understand that entering this building can be a breathtaking experience, especially for book lovers. What Davis has done here is take all that awe and wonder and weave it throughout a delightful mystery/historical novel that travels across generations of fearless women. “[A] page-turner for booklovers everywhere!
@@ -314,7 +318,7 @@ components:
       allOf:
         - $ref: '#/components/schemas/ReaderPreview'
           type: object
-          properties:   
+          properties:
             sectionAccess:
               type: integer
               example: 1
@@ -323,7 +327,7 @@ components:
               example: 0
     ReaderPreview:
       type: object
-      properties:   
+      properties:
         firstName:
           type: string
           example: English
@@ -336,7 +340,7 @@ components:
           example: test@test.org
     LendedBook:
       type: object
-      properties:   
+      properties:
         bookURL:
           type: string
           example: English
@@ -353,7 +357,7 @@ components:
           example: 30d
     LendBook:
       type: object
-      properties:   
+      properties:
         bookId:
           type: string
           example: English
