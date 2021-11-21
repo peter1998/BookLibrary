@@ -312,6 +312,10 @@ components:
         numberOfCopies:
           type: integer
           minimum: 1
+        rating:
+          type: number
+          format: float
+          example: 4.6
         commentsLink:
           type: string
     Reader:
