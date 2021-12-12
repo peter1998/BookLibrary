@@ -20,7 +20,7 @@ services:
     environment:
       ME_CONFIG_MONGODB_ADMINUSERNAME: test123
       ME_CONFIG_MONGODB_ADMINPASSWORD: test123
-      ME_CONFIG_MONGODB_URL: mongodb://sum:sum@database:27017/
+      ME_CONFIG_MONGODB_URL: mongodb://test123:test123@database:27017/
     networks:
       mongo-net:
 

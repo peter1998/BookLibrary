@@ -68,8 +68,10 @@
 
 Features:
 	- Reting (Likes/Dislikes)
+	- Ganre and Language repositories
 	- Reader pictures 
 	- Expirience and Ranks
 	- Reader Admin type
 	- Mail for expired lends
+	- https://biblioman.chitanka.info/books/16259
 

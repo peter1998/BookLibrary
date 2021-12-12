@@ -25,6 +25,7 @@ public class Book {
     private String genre;
     private int numberOfPages;
     private int numberOfCopies;
+    private int numberOfAvailableCopies;
     private float rating;
 
     private List<Comment> comments;
